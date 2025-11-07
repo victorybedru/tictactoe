@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <ul class="myHeader">
+            <li><button id="toggleMode" data-hover="Toggle"><i class="fa-solid fa-moon"></i> </button></li>
+            <li><button id="info" data-hover="Get info on How to play"><i class="fa-solid fa-info"></i></button></li>
+        </ul>
+    </header>
+
+    <!-- Start Screen -->
+    <div id="startScreen">
+        <h2>Choose Mode</h2>
+        <div class="mode-buttons">
+            <button id="onePlayer">1 Player</button>
+            <button id="twoPlayer">2 Players</button>
+        </div>
+
+        <div id="nameInput" style="display:none;">
+            <h3>Enter Player Names</h3>
+            <div class="name-inputs">
+                <input type="text" id="playerXName" placeholder="Player X Name">
+                <input type="text" id="playerOName" placeholder="Player O Name" style="display:none;">
+            </div>
+            <button id="startGameBtn">Start Game</button>
+        </div>
+    </div>
+
+    <h1>Tic Tac Toe</h1>
+    
+    <div id="information">
+        <h2>Game Rules</h2>
+        <p>Two players take turns marking spaces in a 3×3 grid — one with X, the other with O.
+        The first player to align three marks in a row — horizontally, vertically, or diagonally — wins.
+        If all boxes are filled and no one wins, it's a draw.</p>
+        <button id="back">Back</button>
+    </div>
+    
+    <section id="playGround">
+        <div id="scoreCount">
+            <h2 class="score">Score Board <i class="fa-solid fa-trophy"></i></h2>
+            <p id="x">Player X: <span id="resultX">0</span></p>
+            <p id="playerO">Player O: <span id="resultO">0</span></p>
+            <button id="restart">Restart</button>
+        </div>
+        <div class="cells">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
+    </section>
+    
+    <div id="winnerText"> 
+        <p id="winner"></p>
+        <div class="butto">
+            <button id="again">Play Again</button>
+            <button id="newG">New Game</button>
+        </div>
+    </div>
+    
+    <div id="drawText">
+        <p id="draw"></p>
+        <div class="butto">
+            <button id="again1">Play Again</button>
+            <button id="newG1">New Game</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

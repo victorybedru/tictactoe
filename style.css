@@ -1,0 +1,617 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: cursive;
+    text-align: center;
+}
+ul{
+    list-style: none;
+}
+li{
+    padding: 5px;
+}
+.myHeader{
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+#toggleMode, #info{
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+    font-size: 1.6em;
+    cursor:pointer;
+}
+#toggleMode:hover, #info:hover{
+    transform: scale(1.2);
+    background:#444;
+    color: white;
+}
+h1{
+    font-weight: 600;
+    font-size: 60px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(0, 30px);
+}
+h1:hover{
+    transform: translate(0,20px);
+}
+
+/* Start Screen Styles */
+#startScreen {
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    z-index: 1000;
+}
+
+#startScreen h2 {
+    font-size: 3em;
+    margin-bottom: 40px;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+#startScreen button {
+    padding: 15px 25px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+#onePlayer, #twoPlayer {
+    background: #4CAF50;
+    color: white;
+    min-width: 150px;
+}
+
+#onePlayer:hover, #twoPlayer:hover {
+    transform: scale(1.1);
+    background: #45a049;
+}
+
+#nameInput {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#nameInput h3 {
+    font-size: 2em;
+}
+
+.name-inputs {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#nameInput input {
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid #ccc;
+    min-width: 200px;
+}
+
+#startGameBtn {
+    background: #2196F3;
+    color: white;
+}
+
+#startGameBtn:hover {
+    background: #1976D2;
+    transform: scale(1.05);
+}
+
+#playGround{
+    height:80vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+#scoreCount{
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 20px;
+    margin-right: 100px;
+    font-size:1.5em;
+    width: 500px;
+    height: 400px
+}
+#scoreCount:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+h2{
+    font-size: 40px;
+    padding: 20px;
+}
+#restart{
+    margin: 20px auto;
+    display: block;
+    padding: 8px;
+    border-radius: 10px;
+    font-size:0.8em;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+#restart:hover {
+    background-color:white;
+    color:black;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+.cells{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+.cells:hover{
+    transform: scale(1.1);
+}
+.cell{
+    border: 4px solid black;
+    height:100px;
+    width: 100px;
+    font-size:5em;
+    text-align: center;
+    font-family: "Permanent Marker" , cursive;
+    font-weight:600;
+    cursor: pointer;
+}
+.cell:nth-child(2), .cell:nth-child(3), .cell:first-child{
+    border-top: none;
+}
+.cell:nth-child(3n+1){
+    border-left: none;
+}
+.cell:nth-child(3n+3){
+    border-right: none;
+}
+.cell:nth-child(8), .cell:nth-child(7), .cell:last-child{
+    border-bottom: none;
+}
+#information{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    font-size:1.5em;
+    justify-content: center;
+    align-items: center; 
+    background-color: rgba(0,0,0,0.9);
+    color:white;
+    flex-direction: column;
+    margin:0 auto;
+    z-index: 1001;
+}
+#back{
+    padding:10px;
+    border-radius: 10px;
+    margin-top: 50px;
+    font-size: 20px;
+}
+#back:hover{
+    transform: scale(1.1);
+}
+/* Winning Text */
+#winnerText {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  font-size: 4em;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.9);
+  color: gold;
+  flex-direction: column;
+  padding: 40px;
+  border-radius: 20px;
+  z-index: 1002;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  animation: rotateFade 1.5s ease forwards;
+}
+
+/* Draw Text */
+#drawText {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  font-size: 4em;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.9);
+  color: gold;
+  flex-direction: column;
+  padding: 40px;
+  border-radius: 20px;
+  border: 4px solid gold;
+  z-index: 1002;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  animation: rotateFade 1.5s ease forwards;
+}
+
+/* Buttons inside winner/draw boxes */
+#winnerText .butto, 
+#drawText .butto {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+#again, #newG, #again1, #newG1 {
+  padding: 10px;
+  background-color: gold;
+  color:rgb(11, 11, 11);
+  border: none;
+  border-radius: 10px;
+  font-size:0.5em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none; 
+}
+
+#again:hover, #newG:hover, #again1:hover, #newG1:hover {
+  transform: scale(1.1);
+  background-color: #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes rotateFade {
+  0%   { opacity: 0; transform: translate(-50%, -50%) rotate(-360deg) scale(0); }
+  50%  { opacity: 1; transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+  100% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+}
+
+/* Mode selection buttons - Blue theme */
+#onePlayer, #twoPlayer {
+  background: black;
+  color: white;
+  min-width: 150px;
+  border: none;
+}
+
+#onePlayer:hover, #twoPlayer:hover {
+  transform: scale(1.1);
+  background: white; 
+  color:black;
+}
+
+#startGameBtn {
+  background:gold; 
+  color: white;
+  border: none;
+}
+
+#startGameBtn:hover {
+  background: black; 
+  transform: scale(1.05);
+}
+.darkMode{
+    background-color: black;
+    color:white;
+}
+.darkMode .cell:nth-child(2), .darkMode .cell:nth-child(3), .darkMode .cell:first-child{
+    border-top: none;
+}
+.darkMode .cell:nth-child(3n+1){
+    border-left: none;
+}
+.darkMode .cell:nth-child(3n+3){
+    border-right: none;
+}
+.darkMode .cell:nth-child(8), .darkMode .cell:nth-child(7), .darkMode .cell:last-child{
+    border-bottom: none;
+}
+.darkMode .cell{
+    border: 4px solid white;
+    height:100px;
+    width: 100px;
+    font-size:5em;
+    text-align: center;
+    font-family: "Permanent Marker" , cursive;
+    font-weight:600;
+}
+.darkMode #scoreCount{
+    padding: 30px;
+    text-align: center;
+    background-color:#1E1E1E;
+    border-radius: 20px;
+    margin-right: 50px;
+    font-size:1.5em;
+    width: 500px;
+    height: 400px;
+}
+.darkMode #scoreCount:hover{
+    box-shadow: 0 0 10px 5px rgba(255,255,255,0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #playGround {
+        margin: 0 auto;
+        display: block;
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        gap: 40px;
+    }
+    
+    #scoreCount {
+        margin: 0 auto;
+        display: block;
+        width:60%;
+        height:auto;
+        order: 2; 
+    }
+    
+    .cells {
+        order: 1; /* Keep cells on top */
+    }
+    
+    h1 {
+        font-size: 50px;
+        margin-bottom: 20px;
+        margin: 0 auto;
+        display: block;
+        transform: translate(0, 20px);
+    }
+    
+    .cell {
+        height: 90px;
+        width: 90px;
+        font-size: 4em;
+    }
+    
+    .mode-buttons {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 40px;
+        transform: translate(0, 15px);
+        margin-bottom:20px;
+    }
+    
+    #scoreCount {
+        width:60%;
+        height:auto;
+        margin: 0 auto;
+        display: block;
+        font-size: 1.3em;
+        padding: 20px;
+    }
+    
+    .score {
+        font-size: 35px;
+    }
+    
+    .cells {
+        transform: scale(0.9);
+    }
+    
+    .cell {
+        height: 80px;
+        width: 80px;
+        font-size: 3.5em;
+    }
+    
+    #winnerText, #drawText {
+        font-size: 3em;
+        padding: 30px;
+    }
+    
+    .myHeader {
+        padding: 15px;
+    }
+    
+    #toggleMode, #info {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4em;
+    }
+    
+    .mode-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .name-inputs {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    #nameInput input {
+        min-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 30px;
+        transform: translate(0, 10px);
+    }
+    
+    #playGround {
+        padding: 10px;
+        gap: 30px;
+    }
+    
+    #scoreCount {
+        width:60%;
+        height:auto;
+        margin: 0 auto;
+        display: block;
+        font-size: 1.1em;
+        padding: 15px;
+    }
+    
+    .score {
+        font-size: 28px;
+        padding: 15px;
+    }
+    
+    .cells {
+        transform: scale(0.8);
+        margin-top: 20px;
+    }
+    
+    .cell {
+        height: 70px;
+        width: 70px;
+        font-size: 3em;
+    }
+    
+    #winnerText, #drawText {
+        font-size: 2.5em;
+        padding: 20px;
+    }
+    
+    #again, #newG, #again1, #newG1 {
+        padding: 12px 20px;
+        font-size: 0.9em;
+    }
+    
+    #startScreen h2 {
+        font-size: 2em;
+    }
+    
+    #startScreen button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+    
+    #nameInput input {
+        width: 250px;
+        font-size: 0.9em;
+    }
+    
+    #information {
+        font-size: 1.2em;
+        padding: 20px;
+    }
+    
+    .myHeader {
+        padding: 10px;
+    }
+    
+    #toggleMode, #info {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 360px) {
+    h1 {
+        font-size: 25px;
+    }
+    
+    #playGround {
+        gap: 20px;
+    }
+    
+    #scoreCount {
+        width: 60%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+        font-size: 1em;
+        padding: 12px;
+    }
+    
+    .score {
+        font-size: 24px;
+        padding: 12px;
+    }
+    
+    .cells {
+        transform: scale(0.7);
+        margin-top: 10px;
+    }
+    
+    .cell {
+        height: 60px;
+        width: 60px;
+        font-size: 2.5em;
+    }
+    
+    #winnerText, #drawText {
+        font-size: 2em;
+        padding: 15px;
+    }
+    
+    #again, #newG, #again1, #newG1 {
+        padding: 10px 15px;
+        font-size: 0.8em;
+    }
+    
+    #startScreen h2 {
+        font-size: 1.8em;
+    }
+    
+    #startScreen button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    
+    #nameInput input {
+        width: 220px;
+    }
+}
+
+/* Make sure the playGround uses flex column on mobile */
+#playGround {
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
+    #playGround {
+        flex-direction: column;
+    }
+}
